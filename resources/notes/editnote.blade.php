@@ -1,18 +1,35 @@
-@extends('layout')
+<?php
 
-@section('content')
-  <h1>the note</h1>
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-  <form method="POST" action="/notes/{{ $note->id }}">
-    {{ method_field('PATCH') }}
+class CreateUsersTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('users', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('username')->unique();
+            $table->string('email')->unique();
+            $table->string('password');
+            // $table->rememberToken();
+            $table->timestamps();
+        });
+    }
 
-    <div class="form-group">
-      <textarea name="body" class="form-control">{{ $note->body }}</textarea>
-    </div>
-
-    <div class="form-group">
-      <button type="submit" class="btn btn-primary">Update the Note</button>
-    </div>
-  </form>
-
-@stop
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('users');
+    }
+}
