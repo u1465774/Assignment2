@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Card;
 use App\Note;
 use Illuminate\Http\Request;
-
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
 
 class NotesController extends Controller
 {
@@ -18,9 +19,24 @@ class NotesController extends Controller
     //$card->notes()->save($note);
 
     //return back();
+    $this->validate($request, ['body' => 'required|min:8'
+    ]);
 
-    $card->addNote(new Note($request->all()));
+    $note = new Note($request->all());
 
+    $card->addNote($note, 1);
+
+    return back();
+  }
+
+  public function edit(Note $note)
+  {
+    return view('notes.editnote', compact('note'));
+  }
+
+  public function update(Request $request, Note $note)
+  {
+    $note->update($request->all());
     return back();
   }
 }
