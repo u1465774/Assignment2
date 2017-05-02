@@ -13,6 +13,7 @@
 
     <div class="form-group">
       <button type="submit" class="btn btn-primary">Update the Note</button>
+      <a href="/cards" class="pull-right">Back</a>
     </div>
   </form>
 
