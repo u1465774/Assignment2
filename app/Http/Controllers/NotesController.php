@@ -29,6 +29,13 @@ class NotesController extends Controller
     return back();
   }
 
+  public function delete(Note $note)
+  {
+    $note->delete();
+
+    return back();
+  }
+
   public function edit(Note $note)
   {
     return view('notes.editnote', compact('note'));
