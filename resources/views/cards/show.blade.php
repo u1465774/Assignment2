@@ -3,22 +3,23 @@
 @section('content')
 
 <div class="row">
-  <div class="col-md-6 col-md-offset-3"
-
-    <h1>{{ $card->title }}</h1>
-    <h4>{{ $card->contents }}</h4>
-    <h4>By {{ $card->username }}</h4>
+  <div class="col-md-6 col-md-offset-3">
+    <h4></h4>
+    <h1>Discussion page</h1>
+    <h2>Title: {{ $card->title }}</h2>
+    <h4>Contents: {{ $card->contents }}</h4>
+    <h4>Card created by: {{ $card->username }}</h4>
 
       <ul class="list-group">
         @foreach ($card->notes as $note)
-          <li class="list-group-item">{{ $note->body }}
+          <li class="list-group-item"><a href="/notes/{{ $note->id }}/edit"> {{ $note->body }}</a>
             <a href="#" style="float:right"> {{ $note->user->username }}</a>
           </li>
         @endforeach
       </ul>
 
       <hr>
-      <h3> Add a new note about the car</h3>
+      <h3>Talk about the topic</h3>
 
         <form method="POST" action="/cards/{{ $card->id }}/notes">
           {{ csrf_field() }}
@@ -28,6 +29,7 @@
 
           <div class="form-group">
             <button type="submit" class="btn btn-primary">Submit Note</button>
+            <a href="/cards" class="pull-right">Back</a>
           </div>
         </form>
 
